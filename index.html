@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Documentation Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="banner">
+        <h1>Introduction to the Angular docs</h1>
+    </header>
+    <main id="main-doc">
+        <section id="Introduction_to_the_Angular_docs" class="main-section">
+            <header>
+                <h2>Introduction to the Angular docs</h2>
+            </header>
+            <p>Angular is an application-design framework and development platform for creating efficient and
+                sophisticated single-page apps.</p>
+            <hr>
+            </hr>
+        </section>
+        <section id="What_is_Angular?" class="main-section">
+            <header>
+                <h2>What is Angular?</h2>
+            </header>
+            <p>This topic can help you understand Angular: what Angular is, what advantages it provides, and what you
+                might expect as you start to build your applications.</p>
+            <p>Angular is a development platform, built on TypeScript. As a platform, Angular includes:</p>
+            <ul>
+                <li>a component-based framework for building scalable web applications;</li>
+                <li>a collection of well-integrated libraries that cover a wide variety of features, including routing,
+                    forms management, client-server communication, and more;</li>
+                <li>a suite of developer tools to help you develop, build, test, and update your code.</li>
+            </ul>
+            <p>With Angular, you're taking advantage of a platform that can scale from single-developer projects to
+                enterprise-level applications. Angular is designed to make updating as straightforward as possible, so
+                take advantage of the latest developments with minimal effort. Best of all, the Angular ecosystem
+                consists of a diverse group of over 1.7 million developers, library authors, and content creators.</p>
+            <hr>
+            </hr>
+        </section>
+        <section id="Angular_applications:_The_essentials" class="main-section">
+            <header>
+                <h2>Angular applications: The essentials</h2>
+            </header>
+            <p>This section explains the core ideas behind Angular. Understanding these ideas can help you design and
+                build your applications more effectively.</p>
+        </section>
+        <section id="Components" class="main-section">
+            <header>
+                <h3>Components</h3>
+            </header>
+            <p>Components are the building blocks that compose an application. A component includes a TypeScript class
+                with a @Component() decorator, an HTML template, and styles. The @Component() decorator specifies the
+                following Angular-specific information:</p>
+            <ul>
+                <li>a CSS selector that defines how the component is used in a template. HTML elements in your template
+                    that match this selector become instances of the component;</li>
+                <li>an HTML template that instructs Angular how to render the component;</li>
+                <li>an optional set of CSS styles that define the appearance of the template's HTML elements.</li>
+            </ul>
+            <p>The following is a minimal Angular component:</p>
+            <pre>
+            <code>import { Component } from '@angular/core';
+
+@Component({
+  selector: 'hello-world',
+  template: `
+    &lt;h2&gt;Hello World&lt;/h2&gt;
+    &lt;p&gt;This is my first component!&lt;/p&gt;
+  `
+  })
+export class HelloWorldComponent {
+  // The code in this class drives the component's behavior.
+}</code>
+          </pre>
+            <p>To use this component, you write the following in a template:</p>
+            <pre>
+            <code>&lt;hello-world&gt;&lt;/hello-world&gt;</code>
+          </pre>
+            <p>When Angular renders this component, the resulting DOM looks like this:</p>
+            <pre>
+            <code>&lt;hello-world&gt;
+    &lt;h2&gt;Hello World&lt;/h2&gt;
+    &lt;p&gt;This is my first component!&lt;/p&gt;
+&lt;/hello-world&gt;</code>
+          </pre>
+            <p>Angular's component model offers strong encapsulation and an intuitive application structure. Components
+                also make your application painless to unit test and can improve the general readability of your code.
+            </p>
+        </section>
+        <section id="Templates" class="main-section">
+            <header>
+                <h3>Templates</h3>
+            </header>
+            <p>Every component has an HTML template that declares how that component renders. You define this template
+                either inline or by file path</p>
+            <p>Angular adds syntax elements that extend HTML so you can insert dynamic values from your component.
+                Angular automatically updates the rendered DOM when your component's state changes. One application of
+                this feature is inserting dynamic text, as shown in the following example.</p>
+            <pre>
+          <code>&lt;p&gt;{{ message }}&lt;/p&gt;</code>
+        </pre>
+            <p>The value for message comes from the component class:</p>
+            <pre>
+          <code>import { Component } from '@angular/core';
+
+@Component ({
+  selector: 'hello-world-interpolation',
+  templateUrl: './hello-world-interpolation.component.html'
+})
+export class HelloWorldInterpolationComponent {
+    message = 'Hello, World!';
+}</code>
+        </pre>
+            <p>When the application loads the component and its template, the user sees the following:</p>
+            <pre>
+          <code>&lt;p&gt;Hello, World!&lt;/p&gt;</code>
+        </pre>
+            <p>Notice the use of double curly braces—they instruct Angular to interpolate the contents within them.</p>
+            <p>Declare event listeners to listen for and respond to user actions such as keystrokes, mouse movements,
+                clicks, and touches. You declare an event listener by specifying the event name in parentheses:</p>
+            <pre>
+          <code>&lt;button
+  type="button"
+  [disabled]="canClick"
+  (click)="sayMessage()"&gt;
+  Trigger alert message
+&lt;/button&gt;</code>
+        </pre>
+            <p>The preceding example calls a method, which is defined in the component class:</p>
+            <pre>
+          <code>sayMessage() {
+  alert(this.message);
+}</code>
+        </pre>
+            <p>The following is a combined example of Interpolation, Property Binding, and Event Binding within an
+                Angular template:</p>
+            <h4>hello-world-bindings.component.ts</h4>
+            <pre>
+          <code>import { Component } from '@angular/core';
+
+@Component ({
+  selector: 'hello-world-bindings',
+  templateUrl: './hello-world-bindings.component.html'
+})
+export class HelloWorldBindingsComponent {
+  fontColor = 'blue';
+  sayHelloId = 1;
+  canClick = false;
+  message = 'Hello, World';
+
+  sayMessage() {
+    alert(this.message);
+  }
+}</code>
+        </pre>
+            <h4>hello-world-bindings.component.html</h4>
+            <pre>
+          <code>&lt'button
+  type="button"
+  [disabled]="canClick"
+  (click)="sayMessage()"&gt;
+  Trigger alert message
+&lt;/button&gt;
+
+&lt;p
+  [id]="sayHelloId"
+  [style.color]="fontColor"&gt;
+  You can set my color in the component!
+&lt;/p&gt;
+
+&lt;p&gt;My color is {{ fontColor }}&lt;/p&gt;</code>
+        </pre>
+            <p>Add features to your templates by using directives. The most popular directives in Angular are <span
+                    class="font-ng">*ngIf</span> and <span class="font-ng">*ngFor</span>. Use directives to perform a
+                variety of tasks, such as dynamically modifying the DOM structure. And create your own custom directives
+                to create great user experiences.</p>
+            <p>The following code is an example of the <span class="font-ng">*ngIf</span> directive.</p>
+            <h4>hello-world-ngif.component.ts</h4>
+            <pre>
+          <code>import { Component } from '@angular/core';
+ 
+@Component({
+  selector: 'hello-world-ngif',
+  templateUrl: './hello-world-ngif.component.html'
+})
+export class HelloWorldNgIfComponent {
+  message = "I'm read only!";
+  canEdit = false;
+ 
+  onEditClick() {
+    this.canEdit = !this.canEdit;
+    if (this.canEdit) {
+      this.message = 'You can edit me!';
+    } else {
+      this.message = "I'm read only!";
+    }
+  }
+}</code>
+        </pre>
+            <h4>hello-world-ngif.component.html</h4>
+            <pre>
+          <code>&lt;h2&gt;Hello World: ngIf!&lt;/h2&gt;
+ 
+&lt;button type="button" (click)="onEditClick()"&gt;Make text editable!
+&lt;/button&gt;
+ 
+&lt;div *ngIf="canEdit; else noEdit"&gt;
+    &lt;p&gt;You can edit the following paragraph.&lt;/p&gt;
+&lt;/div&gt;
+ 
+&lt;ng-template #noEdit&gt;
+    &lt;p&gt;The following paragraph is read only. Try clicking the button!&lt;/p&gt;
+&lt;/ng-template&gt;
+ 
+&lt;p [contentEditable]="canEdit"&gt;{{ message }}&lt;/p&gt;</code>
+        </pre>
+            <p>Angular's declarative templates let you cleanly separate your application's logic from its presentation.
+                Templates are based on standard HTML, for ease in building, maintaining, and updating.</p>
+        </section>
+        <section id="Dependency_injection" class="main-section">
+            <header>
+                <h3>Dependency injection</h3>
+            </header>
+            <p>Dependency injection lets you declare the dependencies of your TypeScript classes without taking care of
+                their instantiation. Instead, Angular handles the instantiation for you. This design pattern lets you
+                write more testable and flexible code. Understanding dependency injection is not critical to start using
+                Angular, but it is strongly recommended as a best practice. Many aspects of Angular take advantage of it
+                to some degree.</p>
+            <p>To illustrate how dependency injection works, consider the following example. The first file, <span
+                    class="font-ng">logger.service.ts</span>, defines a <span class="font-ng">Logger</span> class. This
+                class contains a <span class="font-ng">writeCount</span> function that logs a number to the console.</p>
+            <pre>
+          <code>import { Injectable } from '@angular/core';
+
+@Injectable({providedIn: 'root'})
+export class Logger {
+  writeCount(count: number) {
+    console.warn(count);
+  }
+}</code>
+        </pre>
+            <p>Next, the <span class="font-ng">hello-world-di.component.ts</span> file defines an Angular component.
+                This component contains a button that uses the <span class="font-ng">writeCount</span> function of the
+                <span class="font-ng">Logger</span> class. To access that function, the Logger service is injected into
+                the <span class="font-ng">HelloWorldDI</span> class by adding <span class="font-ng">private logger:
+                    Logger</span> to the constructor.</p>
+            <pre>
+          <code>import { Component } from '@angular/core';
+import { Logger } from '../logger.service';
+
+@Component({
+  selector: 'hello-world-di',
+  templateUrl: './hello-world-di.component.html'
+})
+export class HelloWorldDependencyInjectionComponent  {
+  count = 0;
+
+  constructor(private logger: Logger) { }
+
+  onLogMe() {
+    this.logger.writeCount(this.count);
+    this.count++;
+  }
+}</code>
+        </pre>
+            <hr>
+            </hr>
+        </section>
+        <section id="Angular_CLI" class="main-section">
+            <header>
+                <h2>Angular CLI</h2>
+            </header>
+            <p>The Angular CLI is the fastest, straightforward, and recommended way to develop Angular applications. The
+                Angular CLI makes some tasks trouble-free. For example:</p>
+            <table>
+                <tr>
+                    <th>COMMAND</th>
+                    <th>DETAILS</th>
+                </tr>
+                <tr>
+                    <td class="font-first-column">ng build</td>
+                    <td>Compiles an Angular application into an output directory.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">ng serve</td>
+                    <td>Builds and serves your application, rebuilding on file changes.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">ng generate</td>
+                    <td>Generates or modifies files based on a schematic.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">ng test</td>
+                    <td>Runs unit tests on a given project.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">ng e2e</td>
+                    <td>Builds and serves an Angular application, then runs end-to-end tests.</td>
+                </tr>
+            </table>
+            <p>The Angular CLI is a valuable tool for building out your applications.</p>
+            <hr>
+            </hr>
+        </section>
+        <section id="First-party_libraries" class="main-section">
+            <header>
+                <h2>First-party libraries</h2>
+            </header>
+            <p>The section, Angular applications: the essentials, provides a brief overview of a couple of the key
+                architectural elements that are used when building Angular applications. The many benefits of Angular
+                really become clear when your application grows and you want to add functions such as site navigation or
+                user input. Use the Angular platform to incorporate one of the many first-party libraries that Angular
+                provides.</p>
+            <p>Some of the libraries available to you include:</p>
+            <table>
+                <tr>
+                    <th>LIBRARY</th>
+                    <th>DETAILS</th>
+                </tr>
+                <tr>
+                    <td class="font-first-column">Angular Router</td>
+                    <td>Advanced client-side navigation and routing based on Angular components. Supports lazy-loading,
+                        nested routes, custom path matching, and more.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">Angular Forms</td>
+                    <td>Uniform system for form participation and validation.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">Angular HttpClient</td>
+                    <td>Robust HTTP client that can power more advanced client-server communication.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">Angular Animations</td>
+                    <td>Rich system for driving animations based on application state.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">Angular PWA</td>
+                    <td> Tools for building Progressive Web Applications (PWA) including a service worker and Web
+                        application manifest.</td>
+                </tr>
+                <tr>
+                    <td class="font-first-column">Angular Schematics</td>
+                    <td>Automated scaffolding, refactoring, and update tools that simplify development at large scale.
+                    </td>
+                </tr>
+            </table>
+            <p>These libraries expand your application's capabilities while also letting you focus more on the features
+                that make your application unique. Add these libraries knowing that they're designed to integrate
+                flawlessly into and update simultaneously with the Angular framework.</p>
+            <p>These libraries are only required when they can help you add features to your applications or solve a
+                particular problem.</p>
+            <hr>
+            </hr>
+        </section>
+        <section id="Reference" class="main-section">
+            <header>
+                <h2>Reference</h2>
+            </header>
+            <p>More information at the link <a target="_blank" href="https://angular.io/docs"
+                    class="reference">angular.io</a></p>
+            <hr>
+            </hr>
+        </section>
+    </main>
+    <nav id="navbar">
+        <header><a href="#Introduction_to_the_Angular_docs" class="nav-link">
+                <h3>Introduction to the Angular docs</h3>
+            </a></header>
+        <hr>
+        </hr>
+        <a href="#What_is_Angular?" class="nav-link">
+            <h3>What is Angular?</h3>
+        </a>
+        <hr>
+        </hr>
+        <a href="#Angular_applications:_The_essentials" class="nav-link">
+            <h3>Angular applications: The essentials</h3>
+        </a>
+        <a href="#Components" class="nav-link">
+            <h4>Components</h4>
+        </a>
+        <a href="#Templates" class="nav-link">
+            <h4>Templates</h4>
+        </a>
+        <a href="#Dependency_injection" class="nav-link">
+            <h4>Dependency injection</h4>
+        </a>
+        <hr>
+        </hr>
+        <a href="#Angular_CLI" class="nav-link">
+            <h3>Angular CLI</h3>
+        </a>
+        <hr>
+        </hr>
+        <a href="#First-party_libraries" class="nav-link">
+            <h3>First-party libraries</h3>
+        </a>
+        <hr>
+        </hr>
+        <a href="#Reference" class="nav-link">
+            <h3>Reference</h3>
+        </a>
+        <hr>
+        </hr>
+    </nav>
+</body>
+
+</html>
